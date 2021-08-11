@@ -7,7 +7,7 @@ from sklearn.metrics import pairwise_distances_argmin_min
 from news_scraper import get_trending_articles_today
 from article_clustering import cluster_articles
 
-news_file = 'selected_articles.csv'
+NEWS_FILE = 'selected_articles.csv'
 
 
 def get_mean_vec(vectors, vector_length=300):
@@ -56,12 +56,12 @@ def add_news_to_history_file(summarized_news):
     os.chdir("data/")
 
     summarized_news["date"] = date.today()
-    existing_news = pd.read_csv(news_file)
+    existing_news = pd.read_csv(NEWS_FILE)
     combined_news = pd.concat([existing_news, summarized_news])
     combined_news = combined_news.reset_index(drop=True)
 
     # write all data to file
-    combined_news.to_csv(news_file)
+    combined_news.to_csv(NEWS_FILE)
 
     os.chdir("..")
     os.chdir("src/zinfo/")

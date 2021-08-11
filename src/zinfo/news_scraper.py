@@ -11,7 +11,7 @@ def get_all_articles(query, q_date):
     articles = []
     # goes through all pages until there is no news left, 5 usually is the max
     for i in range(1, 5):
-        page_articles = newsapi.get_everything(q=query, language='en', from_param=q_date,page=i)
+        page_articles = newsapi.get_everything(q=query, language='en', from_param=q_date, page=i)
 
         if len(page_articles) == 0:
             break
