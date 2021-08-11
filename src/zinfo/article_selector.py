@@ -61,7 +61,7 @@ def add_news_to_history_file(summarized_news):
     combined_news = combined_news.reset_index(drop=True)
 
     # write all data to file
-    combined_news.to_csv(NEWS_FILE)
+    combined_news.to_csv(NEWS_FILE, index=False)
 
     os.chdir("..")
     os.chdir("src/zinfo/")
