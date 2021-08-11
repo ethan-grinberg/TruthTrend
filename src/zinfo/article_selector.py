@@ -4,8 +4,8 @@ import os
 from datetime import date
 from sklearn.metrics import pairwise_distances_argmin_min
 
-from news_scraper import NewsScraper
-from article_clustering import cluster_articles
+from src.zinfo.news_scraper import NewsScraper
+from src.zinfo.article_clustering import cluster_articles
 
 NEWS_FILE = 'selected_articles.csv'
 
