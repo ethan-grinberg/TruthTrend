@@ -4,3 +4,6 @@
 .idea/zinfo.iml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/inspectionProfiles/Project_Default.xml
+src/zinfo/__pycache__/article_clustering.cpython-38.pyc
+src/zinfo/__pycache__/news_scraper.cpython-38.pyc
+src/zinfo/__pycache__/article_selector.cpython-38.pyc
