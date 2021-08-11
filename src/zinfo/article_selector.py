@@ -1,9 +1,13 @@
 import pandas as pd
 import numpy as np
+import os
+from datetime import date
 from sklearn.metrics import pairwise_distances_argmin_min
 
 from news_scraper import get_trending_articles_today
 from article_clustering import cluster_articles
+
+news_file = 'selected_articles.csv'
 
 
 def get_mean_vec(vectors, vector_length=300):
@@ -46,6 +50,23 @@ def get_best_article_all_clusters(clusters, article_df):
     return pd.concat(all_news)
 
 
+def add_news_to_history_file(summarized_news):
+    os.chdir("..")
+    os.chdir("..")
+    os.chdir("data/")
+
+    summarized_news["date"] = date.today()
+    existing_news = pd.read_csv(news_file)
+    combined_news = pd.concat([existing_news, summarized_news])
+    combined_news = combined_news.reset_index(drop=True)
+
+    # write all data to file
+    combined_news.to_csv(news_file)
+
+    os.chdir("..")
+    os.chdir("src/zinfo/")
+
+
 # function that ties the scraping, clustering, and article selection together
 def get_summarized_news():
     # gets all trending news articles
@@ -55,5 +76,9 @@ def get_summarized_news():
     # put all trending news into clusters and pick most objective article for each one
     clusters = cluster_articles(trending_news)
     summarized_news = get_best_article_all_clusters(clusters, trending_news)
+    summarized_news = summarized_news.reset_index(drop=True)
 
-    return summarized_news.reset_index(drop=True)
+    # add to record file to keep track of all articles uploaded
+    add_news_to_history_file(summarized_news.copy())
+
+    return summarized_news
