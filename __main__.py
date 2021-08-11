@@ -4,7 +4,7 @@ API_KEY = 'debd522136164978a43f9815fe4dde7d'
 
 
 def main():
-    get_summarized_news(API_KEY)
+    summarized_news = get_summarized_news(API_KEY)
 
 
 if __name__ == "__main__":
