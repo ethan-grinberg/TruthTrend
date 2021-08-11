@@ -4,7 +4,7 @@ import os
 from datetime import date
 from sklearn.metrics import pairwise_distances_argmin_min
 
-from news_scraper import get_trending_articles_today
+from news_scraper import NewsScraper
 from article_clustering import cluster_articles
 
 NEWS_FILE = 'selected_articles.csv'
@@ -68,9 +68,10 @@ def add_news_to_history_file(summarized_news):
 
 
 # function that ties the scraping, clustering, and article selection together
-def get_summarized_news():
+def get_summarized_news(api_key):
     # gets all trending news articles
-    trending_news = get_trending_articles_today()
+    scraper = NewsScraper(api_key)
+    trending_news = scraper.get_trending_articles_today()
     trending_news = trending_news.drop_duplicates(subset=['title'])
 
     # put all trending news into clusters and pick most objective article for each one
