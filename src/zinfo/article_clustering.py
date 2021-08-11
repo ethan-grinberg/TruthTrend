@@ -18,6 +18,22 @@ def preprocess_text(text):
     return preproc_text
 
 
+def get_vectorized_titles(df):
+    sent_vecs = {}
+    # make each article title into a vector
+    for title in df.title:
+        try:
+            doc = nlp(preprocess_text(title))
+            sent_vecs.update({title: doc.vector})
+        except Exception as e:
+            print(e)
+
+    vectors = list(sent_vecs.values())
+    titles = list(sent_vecs.keys())
+
+    return np.array(vectors), titles
+
+
 # finds optimal epsilon value for dbscan clustering
 def get_best_eps_val(vectors, neighbors=2, eps_factor=2):
     neigh = NearestNeighbors(n_neighbors=neighbors)
@@ -38,23 +54,13 @@ def get_best_min_sample_val(num_total_articles, factor=132):
 
 
 def cluster_articles(df):
-    sent_vecs = {}
-    # make each article title into a vector
-    for title in df.title:
-        try:
-            doc = nlp(preprocess_text(title))
-            sent_vecs.update({title: doc.vector})
-        except Exception as e:
-            print(e)
-
-    vectors = list(sent_vecs.values())
-    x = np.array(vectors)
+    x, titles = get_vectorized_titles(df)
 
     # finds best hyper parameters for dbscan
     eps = get_best_eps_val(x)
     min_articles = get_best_min_sample_val(len(df))
+
     # clusters articles using dbscan
     dbscan = DBSCAN(eps=eps, min_samples=min_articles, metric='cosine').fit(x)
 
-    titles = list(sent_vecs.keys())
-    return pd.DataFrame({'label': dbscan.labels_, 'title': titles, 'vectors': vectors})
+    return pd.DataFrame({'label': dbscan.labels_, 'title': titles, 'vectors': x})

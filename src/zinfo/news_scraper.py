@@ -9,23 +9,29 @@ newsapi = NewsApiClient(api_key=API_KEY)
 
 def get_all_articles(query, q_date):
     articles = []
-    # goes through all pages until there is no news left, 5 usually is the max
-    for i in range(1, 5):
+    # goes through all pages until there is no news left
+    i = 0
+    while True:
         page_articles = newsapi.get_everything(q=query, language='en', from_param=q_date, page=i)
 
         if len(page_articles) == 0:
             break
         else:
             articles.extend(page_articles["articles"])
+        i += 1
 
     return articles
 
 
 # TODO work on finding better way to get trending topics and get more related news
-def get_trending_articles_today():
+def get_trending_articles_today(num_trends=len(newspaper.hot())):
     today = date.today().strftime("%Y-%m-%d")
     # gets trending google searches
     trending_topics = newspaper.hot()
+
+    # gets smaller sample if prompted by user
+    if num_trends < len(trending_topics):
+        trending_topics = trending_topics[:num_trends]
 
     data = []
     for topic in trending_topics:
