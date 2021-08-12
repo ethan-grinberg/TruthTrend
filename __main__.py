@@ -1,3 +1,5 @@
+#!/usr/bin/python3.9
+
 from src.zinfo.article_selector import get_summarized_news
 from src.zinfo.twitter_bot import TwitterBot
 
