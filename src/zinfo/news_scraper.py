@@ -14,6 +14,11 @@ class NewsScraper:
         # goes through all pages until there is no news left
         i = 1
         while True:
+            # TODO remove later
+            # because developer plan doesn't allow more than 100 articles
+            if len(articles) >= 100:
+                break
+
             page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i)
 
             if len(page_articles) == 0:
