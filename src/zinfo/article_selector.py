@@ -52,9 +52,8 @@ def get_best_article_all_clusters(clusters, article_df):
     return pd.concat(all_news)
 
 
+# TODO improve os.chdir() depends on where this function is being run
 def add_news_to_history_file(summarized_news):
-    os.chdir("..")
-    os.chdir("..")
     os.chdir("data/")
 
     summarized_news["date"] = date.today()
@@ -66,7 +65,6 @@ def add_news_to_history_file(summarized_news):
     combined_news.to_csv(NEWS_FILE, index=False)
 
     os.chdir("..")
-    os.chdir("src/zinfo/")
 
 
 # function that ties the scraping, clustering, and article selection together

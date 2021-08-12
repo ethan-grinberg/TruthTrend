@@ -24,7 +24,7 @@ class NewsScraper:
 
     # TODO work on finding better way to get trending topics and get more related news
     def get_trending_articles_today(self, num_trends=len(newspaper.hot())):
-        print("scraping articles")
+        print("scraping articles for " + str(num_trends) + " trends")
 
         today = date.today().strftime("%Y-%m-%d")
         # gets trending google searches
