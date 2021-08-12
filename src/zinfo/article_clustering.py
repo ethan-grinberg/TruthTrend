@@ -54,6 +54,8 @@ def get_best_min_sample_val(num_total_articles, factor=132):
 
 
 def cluster_articles(df):
+    print("clustering articles")
+
     x, titles = get_vectorized_titles(df)
 
     # finds best hyper parameters for dbscan

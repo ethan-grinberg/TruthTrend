@@ -12,7 +12,7 @@ class NewsScraper:
     def get_all_articles(self, query, q_date):
         articles = []
         # goes through all pages until there is no news left
-        i = 0
+        i = 1
         while True:
             page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i)
 
@@ -26,6 +26,8 @@ class NewsScraper:
 
     # TODO work on finding better way to get trending topics and get more related news
     def get_trending_articles_today(self, num_trends=len(newspaper.hot())):
+        print("scraping articles")
+
         today = date.today().strftime("%Y-%m-%d")
         # gets trending google searches
         trending_topics = newspaper.hot()

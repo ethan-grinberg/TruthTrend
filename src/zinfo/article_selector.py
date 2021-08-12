@@ -31,6 +31,8 @@ def get_central_vec_title(cluster):
 
 
 def get_best_article_all_clusters(clusters, article_df):
+    print("selecting best articles out of each cluster")
+
     all_news = []
     for cluster in clusters.label.unique():
         # unclustered category
