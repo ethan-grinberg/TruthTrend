@@ -31,7 +31,7 @@ def get_vectorized_titles(df):
     vectors = list(sent_vecs.values())
     titles = list(sent_vecs.keys())
 
-    return np.array(vectors), titles
+    return vectors, titles
 
 
 # finds optimal epsilon value for dbscan clustering
@@ -56,7 +56,8 @@ def get_best_min_sample_val(num_total_articles, factor=132):
 def cluster_articles(df):
     print("clustering articles")
 
-    x, titles = get_vectorized_titles(df)
+    vectors, titles = get_vectorized_titles(df)
+    x = np.array(vectors)
 
     # finds best hyper parameters for dbscan
     eps = get_best_eps_val(x)
@@ -65,4 +66,4 @@ def cluster_articles(df):
     # clusters articles using dbscan
     dbscan = DBSCAN(eps=eps, min_samples=min_articles, metric='cosine').fit(x)
 
-    return pd.DataFrame({'label': dbscan.labels_, 'title': titles, 'vectors': x})
+    return pd.DataFrame({'label': dbscan.labels_, 'title': titles, 'vectors': vectors})
