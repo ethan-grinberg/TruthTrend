@@ -32,7 +32,7 @@ class NewsScraper:
         if num_trends < len(trending_topics):
             trending_topics = trending_topics[:num_trends]
 
-        print("scraping articles for " + str(num_trends) + " trends on" + today)
+        print("scraping articles for " + str(num_trends) + " trends on " + today)
         data = []
         for topic in trending_topics:
             articles = self.get_all_articles(topic, today)
