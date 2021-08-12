@@ -33,9 +33,7 @@ def get_vectorized_titles(df):
     return vectors, titles
 
 
-# finds optimal epsilon value for dbscan clustering
-# going off of the assumption that there should be about as many clusters as there are topics
-def get_best_eps_val(vectors, trending_news, start=2, end=50, step=2, decimal=100):
+def get_num_clusters_per_val(vectors, start, end, step, decimal):
     num_clusters = []
     for i in [float(j) / decimal for j in range(start, end, step)]:
         dbscan = DBSCAN(eps=i, min_samples=2, metric='cosine').fit(vectors)
@@ -44,6 +42,13 @@ def get_best_eps_val(vectors, trending_news, start=2, end=50, step=2, decimal=10
         unique_vals = np.unique(labels)
         unique_vals = unique_vals[1:]
         num_clusters.append(len(unique_vals))
+    
+    return num_clusters
+
+# finds optimal epsilon value for dbscan clustering
+# going off of the assumption that there should be about as many clusters as there are topics
+def get_best_eps_val(vectors, trending_news, start=2, end=50, step=2, decimal=100):
+    num_clusters = get_num_clusters_per_val(vectors, start, end, step, decimal)
 
     unique_topics = trending_news.topic.nunique()
     difference_array = np.absolute(np.array(num_clusters) - unique_topics)
