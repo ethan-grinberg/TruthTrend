@@ -33,10 +33,10 @@ def get_vectorized_titles(df):
     return vectors, titles
 
 
-def get_num_clusters_per_val(vectors, start, end, step, decimal):
+def get_num_clusters_per_val(vectors, min_samples, start, end, step, decimal):
     num_clusters = []
     for i in [float(j) / decimal for j in range(start, end, step)]:
-        dbscan = DBSCAN(eps=i, min_samples=2, metric='cosine').fit(vectors)
+        dbscan = DBSCAN(eps=i, min_samples=min_samples, metric='cosine').fit(vectors)
         # gets number of non -1 clusters
         labels = dbscan.labels_
         unique_vals = np.unique(labels)
@@ -47,8 +47,8 @@ def get_num_clusters_per_val(vectors, start, end, step, decimal):
 
 # finds optimal epsilon value for dbscan clustering
 # going off of the assumption that there should be about as many clusters as there are topics
-def get_best_eps_val(vectors, trending_news, start=2, end=50, step=2, decimal=100):
-    num_clusters = get_num_clusters_per_val(vectors, start, end, step, decimal)
+def get_best_eps_val(vectors, trending_news, min_samples, start=2, end=50, step=2, decimal=100):
+    num_clusters = get_num_clusters_per_val(vectors, min_samples, start, end, step, decimal)
 
     unique_topics = trending_news.topic.nunique()
     difference_array = np.absolute(np.array(num_clusters) - unique_topics)
@@ -58,7 +58,7 @@ def get_best_eps_val(vectors, trending_news, start=2, end=50, step=2, decimal=10
     return best_eps_val
 
 
-def get_best_min_sample_val(num_total_articles, factor=132):
+def get_best_min_sample_val(num_total_articles, factor=280):
     absolue_min = 2
     if num_total_articles <= absolue_min * factor:
         return absolue_min
@@ -73,8 +73,8 @@ def cluster_articles(df):
     x = np.array(vectors)
 
     # finds best hyper parameters for dbscan
-    eps = get_best_eps_val(x, df)
     min_articles = get_best_min_sample_val(len(df))
+    eps = get_best_eps_val(x, df, min_articles)
     print("eps_val: " + str(eps) + "\n" + "min_samples: " + str(min_articles))
 
     # clusters articles using dbscan
