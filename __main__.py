@@ -1,6 +1,6 @@
 from src.zinfo.article_selector import get_summarized_news
 
-API_KEY = 'f2ba8eba75d54f0280ac77382f7810df'
+API_KEY = '5964b2e875064a83a9033afc11f48101'
 
 
 def main():
