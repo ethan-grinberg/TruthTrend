@@ -2,7 +2,7 @@ from src.zinfo.article_selector import get_summarized_news
 from src.zinfo.twitter_bot import TwitterBot
 
 # news api key
-NEWS_API_KEY = '0e4a954687f342dba8cf1219706f7ff9'
+NEWS_API_KEY = 'debd522136164978a43f9815fe4dde7d'
 
 # twitter api keys
 APIKEY = 'aSzivrDavDusqmo0B1rWXjwOs'
