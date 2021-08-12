@@ -55,7 +55,7 @@ def get_best_eps_val(vectors, trending_news, start=2, end=50, step=2, decimal=10
 
 def get_best_min_sample_val(num_total_articles, factor=132):
     absolue_min = 2
-    if num_total_articles <= absolue_min * num_total_articles:
+    if num_total_articles <= absolue_min * factor:
         return absolue_min
     else:
         return int(num_total_articles / factor)
