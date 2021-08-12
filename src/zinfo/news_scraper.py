@@ -11,21 +11,14 @@ class NewsScraper:
 
     def get_all_articles(self, query, q_date):
         articles = []
-        # goes through all pages until there is no news left
-        i = 1
-        while True:
-            # TODO remove later
-            # because developer plan doesn't allow more than 100 articles
-            if len(articles) >= 100:
-                break
-
+        #TODO get rid of hard coding, only like this because of developer plan
+        for i in range(1, 5):
             page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i)
 
             if len(page_articles) == 0:
                 break
             else:
                 articles.extend(page_articles["articles"])
-            i += 1
 
         return articles
 
