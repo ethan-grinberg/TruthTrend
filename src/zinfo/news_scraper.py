@@ -11,7 +11,7 @@ class NewsScraper:
 
     def get_all_articles(self, query, q_date):
         articles = []
-        #TODO get rid of hard coding, only like this because of developer plan
+        # TODO get rid of hard coding, only like this because of developer plan
         for i in range(1, 5):
             page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i)
 
