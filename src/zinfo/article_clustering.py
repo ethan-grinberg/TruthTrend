@@ -62,6 +62,7 @@ def cluster_articles(df):
     # finds best hyper parameters for dbscan
     eps = get_best_eps_val(x)
     min_articles = get_best_min_sample_val(len(df))
+    print("eps_val: " + str(eps) + "\n" + "min_samples: " + str(min_articles))
 
     # clusters articles using dbscan
     dbscan = DBSCAN(eps=eps, min_samples=min_articles, metric='cosine').fit(x)
