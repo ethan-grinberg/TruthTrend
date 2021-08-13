@@ -4,7 +4,7 @@ from src.zinfo.article_selector import get_summarized_news
 from src.zinfo.twitter_bot import TwitterBot
 
 # news api key
-NEWS_API_KEY = 'eeeaefaae3c14737bc08e252a6e1991b'
+NEWS_API_KEY = 'debd522136164978a43f9815fe4dde7d'
 
 # twitter api keys
 APIKEY = 'aSzivrDavDusqmo0B1rWXjwOs'
@@ -19,7 +19,6 @@ def main():
     # authorized twitter bot and tweet all articles
     twitter_bot = TwitterBot(APIKEY, APISECRETKEY, ACCESSTOKEN, ACCESSTOKENSECRET)
     twitter_bot.tweet_all_articles(summarized_news)
-
 
 if __name__ == "__main__":
     main()

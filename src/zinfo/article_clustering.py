@@ -42,7 +42,7 @@ def get_num_clusters_per_val(vectors, min_samples, start, end, step, decimal):
         unique_vals = np.unique(labels)
         unique_vals = unique_vals[1:]
         num_clusters.append(len(unique_vals))
-    
+
     return num_clusters
 
 # finds optimal epsilon value for dbscan clustering
@@ -67,7 +67,7 @@ def get_best_min_sample_val(num_total_articles, factor=280):
 
 
 def cluster_articles(df):
-    print("clustering articles")
+    print("clustering " + str(len(df)) + "articles")
 
     vectors, titles = get_vectorized_titles(df)
     x = np.array(vectors)

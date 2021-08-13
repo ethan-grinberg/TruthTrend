@@ -13,7 +13,7 @@ class NewsScraper:
         articles = []
         # TODO get rid of hard coding, only like this because of developer plan
         for i in range(1, 5):
-            page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i, sort_by='popularity')
+            page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i, sort_by='relevance')
 
             if len(page_articles) == 0:
                 break
@@ -40,7 +40,5 @@ class NewsScraper:
             # add all article info for topic to data
             article_info = [(article['publishedAt'], article['title'], article['url'], topic) for article in articles]
             data.extend(article_info)
-
-        print("scraped " + str(len(data)) + " articles")
 
         return pd.DataFrame(data, columns=["date", "title", "url", "topic"])
