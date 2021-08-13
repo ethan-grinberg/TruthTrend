@@ -13,7 +13,7 @@ class NewsScraper:
         articles = []
         # TODO get rid of hard coding, only like this because of developer plan
         for i in range(1, 5):
-            page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i, sort_by='relevance')
+            page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i, sort_by='relevancy')
 
             if len(page_articles) == 0:
                 break
