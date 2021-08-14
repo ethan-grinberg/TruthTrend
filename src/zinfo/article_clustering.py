@@ -58,7 +58,7 @@ def get_best_eps_val(vectors, trending_news, min_samples, start=2, end=50, step=
     return best_eps_val
 
 
-def get_best_min_sample_val(num_total_articles, factor=280):
+def get_best_min_sample_val(num_total_articles, factor=200):
     absolue_min = 2
     if num_total_articles <= absolue_min * factor:
         return absolue_min

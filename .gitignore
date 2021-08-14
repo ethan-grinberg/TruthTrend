@@ -7,3 +7,4 @@
 src/zinfo/__pycache__/article_clustering.cpython-38.pyc
 src/zinfo/__pycache__/news_scraper.cpython-38.pyc
 src/zinfo/__pycache__/article_selector.cpython-38.pyc
+credentials.txt

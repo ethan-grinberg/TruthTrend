@@ -74,6 +74,7 @@ def get_summarized_news(api_key):
     clusters = cluster_articles(trending_news)
     summarized_news = get_best_article_all_clusters(clusters, trending_news)
     summarized_news = summarized_news.reset_index(drop=True)
+    summarized_news = summarized_news.sort_values(by="num_articles")
 
     # add to record file to keep track of all articles uploaded
     add_news_to_history_file(summarized_news.copy())
