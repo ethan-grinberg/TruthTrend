@@ -7,8 +7,13 @@ class TwitterBot:
         auth.set_access_token(access_token, access_token_secret)
         self.api = tweepy.API(auth)
 
+    def clean_keyword(self, keyword):
+        cleaned_word = keyword.replace(" ", "")
+        cleaned_word = cleaned_word.replace("-", "")
+        return cleaned_word
+
     def tweet_article(self, title, url, keyword):
-        keyword = keyword.replace(" ", "")
+        keyword = self.clean_keyword(keyword)
         tweet = title + ' #' + keyword + ' ' + url
         self.api.update_status(tweet)
 
