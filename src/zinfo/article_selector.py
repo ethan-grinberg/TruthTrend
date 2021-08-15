@@ -7,12 +7,12 @@ from sklearn.metrics import pairwise_distances_argmin_min
 from src.zinfo.news_scraper import NewsScraper
 from src.zinfo.article_clustering import cluster_articles
 
-# this is assuming program is running from main
+# this is assuming program is running from main and server
 NEWS_FILE = 'selected_articles.csv'
 ALL_NEWS = 'all_news.csv'
 cwd = os.getcwd()
-all_news_path = os.path.join(cwd, "data", ALL_NEWS)
-selected_news_path = os.path.join(cwd, "data", NEWS_FILE)
+all_news_path = os.path.join(cwd, "zinfo", "data", ALL_NEWS)
+selected_news_path = os.path.join(cwd, "zinfo", "data", NEWS_FILE)
 
 
 def get_mean_vec(vectors, vector_length=300):
