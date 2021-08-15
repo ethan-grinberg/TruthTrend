@@ -8,6 +8,7 @@ from src.zinfo.news_scraper import NewsScraper
 from src.zinfo.article_clustering import cluster_articles
 
 NEWS_FILE = 'selected_articles.csv'
+ALL_NEWS = 'all_news.csv'
 
 
 def get_mean_vec(vectors, vector_length=300):
@@ -52,7 +53,7 @@ def get_best_article_all_clusters(clusters, article_df):
     return pd.concat(all_news)
 
 
-def add_news_to_history_file(summarized_news):
+def add_selected_news_to_history_file(summarized_news):
     # this is the relative path to where main is running
     relative_path = "data/" + NEWS_FILE
 
@@ -64,6 +65,15 @@ def add_news_to_history_file(summarized_news):
     # write all data to file
     combined_news.to_csv(relative_path, index=False)
 
+def add_all_news_to_history(trending_news):
+    relative_path = "data/" + ALL_NEWS
+
+    existing_news = pd.read_csv(relative_path)
+    combined_news = pd.concat([existing_news, trending_news])
+    combined_news = combined_news.reset_index(drop=True)
+
+    # write all data to file
+    combined_news.to_csv(relative_path, index=False)
 
 # function that ties the scraping, clustering, and article selection together
 def get_summarized_news():
@@ -78,6 +88,7 @@ def get_summarized_news():
     summarized_news = summarized_news.sort_values(by="num_articles")
 
     # add to record file to keep track of all articles uploaded
-    add_news_to_history_file(summarized_news.copy())
+    add_selected_news_to_history_file(summarized_news.copy())
+    add_all_news_to_history(trending_news.copy())
 
     return summarized_news

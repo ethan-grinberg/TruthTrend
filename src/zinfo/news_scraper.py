@@ -10,7 +10,7 @@ class NewsScraper:
         self.API_KEYS = ['5964b2e875064a83a9033afc11f48101', 'eeeaefaae3c14737bc08e252a6e1991b',
                          'debd522136164978a43f9815fe4dde7d', '0e4a954687f342dba8cf1219706f7ff9',
                          'c4cf3a48098e49e9b5da8490c73856eb', 'd4f678b8ecea4996a173f1902c516fcd']
-        self.sort_method = "popularity"
+        self.sort_method = "relevancy"
 
         self.API_KEY = self.API_KEYS[0]
         self.newsapi = NewsApiClient(api_key=self.API_KEY)
@@ -77,11 +77,11 @@ class NewsScraper:
             articles = self.get_all_articles(topic, today)
 
             # add all article info for topic to data
-            article_info = [(article['publishedAt'], article['title'], article['url'], topic) for article in articles]
+            article_info = [(article['publishedAt'], article['title'], article['url'], article["source"]["name"], topic) for article in articles]
             data.extend(article_info)
 
         # combine data and remove duplicate articles
-        trending_news = pd.DataFrame(data, columns=["date", "title", "url", "topic"])
+        trending_news = pd.DataFrame(data, columns=["date", "title", "url", "source", "topic"])
         trending_news = trending_news.drop_duplicates(subset=['title'])
         print("scraped " + str(len(trending_news)) + " articles")
         return trending_news
