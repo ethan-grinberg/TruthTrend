@@ -87,7 +87,7 @@ def cluster_articles(df):
     min_articles = get_best_min_sample_val(len(df))
     target_cluster_num = get_target_cluster_num(df)
     eps = get_best_eps_val(x, target_cluster_num, min_articles)
-    print("eps_val: " + str(eps) + "\n" + "min_samples: " + str(min_articles))
+    print("eps_val: " + str(eps) + "\n" + "min_samples: " + str(min_articles) + " \ntarget cluster num: " + str(target_cluster_num))
 
     # clusters articles using dbscan
     dbscan = DBSCAN(eps=eps, min_samples=min_articles, metric='cosine').fit(x)
