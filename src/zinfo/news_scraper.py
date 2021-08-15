@@ -9,7 +9,8 @@ class NewsScraper:
     def __init__(self):
         self.API_KEYS = ['5964b2e875064a83a9033afc11f48101', 'eeeaefaae3c14737bc08e252a6e1991b',
                          'debd522136164978a43f9815fe4dde7d', '0e4a954687f342dba8cf1219706f7ff9',
-                         'c4cf3a48098e49e9b5da8490c73856eb', 'd4f678b8ecea4996a173f1902c516fcd']
+                         'c4cf3a48098e49e9b5da8490c73856eb', 'd4f678b8ecea4996a173f1902c516fcd',
+                         'f2ba8eba75d54f0280ac77382f7810df']
         self.sort_method = "relevancy"
 
         self.API_KEY = self.API_KEYS[0]
