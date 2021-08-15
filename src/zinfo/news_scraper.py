@@ -20,7 +20,7 @@ class NewsScraper:
         self.API_KEY = api_key
         self.newsapi = NewsApiClient(api_key=api_key)
 
-    # TODO haven't made sure this works yet
+    # TODO currently iterates over the same key even if it doesn't work, optimize
     def pick_different_api_key(self, query, q_date, page):
         # switch to next api key
         self.set_api_key(self.API_KEYS[1])
@@ -28,7 +28,6 @@ class NewsScraper:
         page_articles = []
         # starts at 1 because first api key was already chosen
         for i in range(1, len(self.API_KEYS)):
-            # TODO remove this print statement later
             print("switching to " + str(i) + " index of api keys")
             try:
                 page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=page,
@@ -51,7 +50,7 @@ class NewsScraper:
                 page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=i,
                                                             sort_by=self.sort_method)
             except NewsAPIException as e:
-                print("first key didn't work")
+                print("current key didn't work")
                 page_articles = self.pick_different_api_key(query, q_date, i)
 
             if len(page_articles) == 0:
