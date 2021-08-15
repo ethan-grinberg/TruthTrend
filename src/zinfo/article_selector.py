@@ -65,6 +65,7 @@ def add_selected_news_to_history_file(summarized_news):
     # write all data to file
     combined_news.to_csv(relative_path, index=False)
 
+
 def add_all_news_to_history(trending_news):
     relative_path = "data/" + ALL_NEWS
 
@@ -74,6 +75,7 @@ def add_all_news_to_history(trending_news):
 
     # write all data to file
     combined_news.to_csv(relative_path, index=False)
+
 
 # function that ties the scraping, clustering, and article selection together
 def get_summarized_news():

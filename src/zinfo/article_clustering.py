@@ -6,7 +6,9 @@ from sklearn.cluster import DBSCAN
 
 # nlp modules
 import spacy
+
 nlp = spacy.load('en_core_web_lg')
+MIN_ARTICLES = 10
 
 
 # removes stop words and punctuation from title for vectorization
@@ -33,6 +35,15 @@ def get_vectorized_titles(df):
     return vectors, titles
 
 
+# gets a number of clusters to shoot for based on distribution of data
+def get_target_cluster_num(trending_news):
+    topics = trending_news.topic.value_counts()
+    no_info = topics.loc[topics < MIN_ARTICLES].index
+    num_important_topics = topics.drop(no_info).nunique()
+    return num_important_topics
+
+
+# TODO maybe make the step size smaller
 def get_num_clusters_per_val(vectors, min_samples, start, end, step, decimal):
     num_clusters = []
     for i in [float(j) / decimal for j in range(start, end, step)]:
@@ -45,13 +56,13 @@ def get_num_clusters_per_val(vectors, min_samples, start, end, step, decimal):
 
     return num_clusters
 
+
 # finds optimal epsilon value for dbscan clustering
 # going off of the assumption that there should be about as many clusters as there are topics
-def get_best_eps_val(vectors, trending_news, min_samples, start=2, end=50, step=2, decimal=100):
+def get_best_eps_val(vectors, target_cluster_num, min_samples, start=2, end=50, step=2, decimal=100):
     num_clusters = get_num_clusters_per_val(vectors, min_samples, start, end, step, decimal)
 
-    unique_topics = trending_news.topic.nunique()
-    difference_array = np.absolute(np.array(num_clusters) - unique_topics)
+    difference_array = np.absolute(np.array(num_clusters) - target_cluster_num)
     index = difference_array.argmin()
 
     best_eps_val = (start / decimal) + ((step / decimal) * index)
@@ -74,7 +85,8 @@ def cluster_articles(df):
 
     # finds best hyper parameters for dbscan
     min_articles = get_best_min_sample_val(len(df))
-    eps = get_best_eps_val(x, df, min_articles)
+    target_cluster_num = get_target_cluster_num(df)
+    eps = get_best_eps_val(x, target_cluster_num, min_articles)
     print("eps_val: " + str(eps) + "\n" + "min_samples: " + str(min_articles))
 
     # clusters articles using dbscan

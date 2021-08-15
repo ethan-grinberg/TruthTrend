@@ -61,7 +61,6 @@ class NewsScraper:
         return articles
 
     # TODO work on finding better way to get trending topics and get more related news
-    # TODO look into dropping topics that don't yield many articles or at least input it into dbscan
     def get_trending_articles_today(self, num_trends=len(newspaper.hot())):
         today = date.today().strftime("%Y-%m-%d")
         # gets trending google searches
