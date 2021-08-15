@@ -66,11 +66,10 @@ def add_news_to_history_file(summarized_news):
 
 
 # function that ties the scraping, clustering, and article selection together
-def get_summarized_news(api_key):
+def get_summarized_news():
     # gets all trending news articles
-    scraper = NewsScraper(api_key)
+    scraper = NewsScraper()
     trending_news = scraper.get_trending_articles_today()
-    trending_news = trending_news.drop_duplicates(subset=['title'])
 
     # put all trending news into clusters and pick most objective article for each one
     clusters = cluster_articles(trending_news)

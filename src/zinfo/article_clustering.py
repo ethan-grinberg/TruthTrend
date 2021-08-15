@@ -67,7 +67,7 @@ def get_best_min_sample_val(num_total_articles, factor=200):
 
 
 def cluster_articles(df):
-    print("clustering " + str(len(df)) + "articles")
+    print("clustering articles...")
 
     vectors, titles = get_vectorized_titles(df)
     x = np.array(vectors)

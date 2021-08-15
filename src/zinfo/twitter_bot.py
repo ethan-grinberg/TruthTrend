@@ -7,7 +7,8 @@ class TwitterBot:
         auth.set_access_token(access_token, access_token_secret)
         self.api = tweepy.API(auth)
 
-    def clean_keyword(self, keyword):
+    @staticmethod
+    def clean_keyword(keyword):
         cleaned_word = keyword.replace(" ", "")
         cleaned_word = cleaned_word.replace("-", "")
         return cleaned_word
@@ -18,6 +19,7 @@ class TwitterBot:
         self.api.update_status(tweet)
 
     def tweet_all_articles(self, summarized_news):
+        print("tweeting articles...")
         for i in range(0, len(summarized_news)):
             title = summarized_news.iloc[i].title
             url = summarized_news.iloc[i].url
