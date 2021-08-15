@@ -26,6 +26,8 @@ class NewsScraper:
         page_articles = []
         # starts at 1 because first api key was already chosen
         for i in range(1, len(self.API_KEYS)):
+            # TODO remove this print statement later
+            print(i)
             try:
                 page_articles = self.newsapi.get_everything(q=query, language='en', from_param=q_date, page=page,
                                                             sort_by=self.sort_method)
