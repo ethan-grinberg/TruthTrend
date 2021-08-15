@@ -7,8 +7,12 @@ from sklearn.metrics import pairwise_distances_argmin_min
 from src.zinfo.news_scraper import NewsScraper
 from src.zinfo.article_clustering import cluster_articles
 
+# this is assuming program is running from main
 NEWS_FILE = 'selected_articles.csv'
 ALL_NEWS = 'all_news.csv'
+cwd = os.getcwd()
+all_news_path = os.path.join(cwd, "data", ALL_NEWS)
+selected_news_path = os.path.join(cwd, "data", NEWS_FILE)
 
 
 def get_mean_vec(vectors, vector_length=300):
@@ -54,27 +58,22 @@ def get_best_article_all_clusters(clusters, article_df):
 
 
 def add_selected_news_to_history_file(summarized_news):
-    # this is the relative path to where main is running
-    relative_path = "data/" + NEWS_FILE
-
     summarized_news["date"] = date.today()
-    existing_news = pd.read_csv(relative_path)
+    existing_news = pd.read_csv(selected_news_path)
     combined_news = pd.concat([existing_news, summarized_news])
     combined_news = combined_news.reset_index(drop=True)
 
     # write all data to file
-    combined_news.to_csv(relative_path, index=False)
+    combined_news.to_csv(selected_news_path, index=False)
 
 
 def add_all_news_to_history(trending_news):
-    relative_path = "data/" + ALL_NEWS
-
-    existing_news = pd.read_csv(relative_path)
+    existing_news = pd.read_csv(all_news_path)
     combined_news = pd.concat([existing_news, trending_news])
     combined_news = combined_news.reset_index(drop=True)
 
     # write all data to file
-    combined_news.to_csv(relative_path, index=False)
+    combined_news.to_csv(all_news_path, index=False)
 
 
 # function that ties the scraping, clustering, and article selection together
