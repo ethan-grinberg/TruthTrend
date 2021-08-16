@@ -22,6 +22,7 @@ def preprocess_text(text):
 def get_vectorized_titles(df):
     sent_vecs = {}
     # make each article title into a vector
+    # TODO check to make sure that this try catch doesn't effect indexing
     for title in df.title:
         try:
             doc = nlp(preprocess_text(title))
