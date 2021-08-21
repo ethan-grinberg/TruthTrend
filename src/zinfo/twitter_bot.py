@@ -1,4 +1,7 @@
 import tweepy
+import spacy
+
+nlp = spacy.load('en_core_web_sm')
 
 
 class TwitterBot:
@@ -9,9 +12,9 @@ class TwitterBot:
 
     @staticmethod
     def clean_keyword(keyword):
-        cleaned_word = keyword.replace(" ", "")
-        cleaned_word = cleaned_word.replace("-", "")
-        return cleaned_word
+        doc = nlp(keyword)
+        tokens = [w.lower_ for w in doc if not w.is_punct]
+        return "".join(tokens)
 
     def tweet_article(self, title, url, keyword):
         keyword = self.clean_keyword(keyword)
