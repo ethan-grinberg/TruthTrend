@@ -14,7 +14,13 @@ class TwitterBot:
     def clean_keyword(keyword):
         doc = nlp(keyword)
         tokens = [w.text for w in doc if not w.is_punct]
-        return "".join(tokens)
+        pre_proc_text = "".join(tokens)
+
+        cleaned_text = pre_proc_text.replace(".", "")
+        cleaned_text = cleaned_text.replace("-", "")
+        cleaned_text = cleaned_text.replace("'", "")
+
+        return cleaned_text
 
     def tweet_article(self, title, url, keyword):
         keyword = self.clean_keyword(keyword)
