@@ -13,7 +13,7 @@ class TwitterBot:
     @staticmethod
     def clean_keyword(keyword):
         doc = nlp(keyword)
-        tokens = [w.lower_ for w in doc if not w.is_punct]
+        tokens = [w for w in doc if not w.is_punct]
         return "".join(tokens)
 
     def tweet_article(self, title, url, keyword):
