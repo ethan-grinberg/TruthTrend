@@ -79,8 +79,9 @@ class NewsScraper:
             article_info = [(article['publishedAt'], article['title'], article['url'], article["source"]["name"], topic) for article in articles]
             data.extend(article_info)
 
-        # combine data and remove duplicate articles
+        # combine data, remove duplicate articles, and drop na
         trending_news = pd.DataFrame(data, columns=["date", "title", "url", "source", "topic"])
         trending_news = trending_news.drop_duplicates(subset=['title'])
+        trending_news = trending_news.dropna(subset=["title"])
         print("scraped " + str(len(trending_news)) + " articles")
         return trending_news
