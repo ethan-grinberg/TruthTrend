@@ -1,0 +1,7 @@
+numpy==1.19.2
+newspaper3k==0.2.8
+rake_nltk==1.0.4
+pandas==1.1.3
+newsapi_python==0.2.6
+spacy==3.0.6
+scikit_learn==0.24.2
