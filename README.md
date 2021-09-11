@@ -1,2 +1,0 @@
-# zinfo
-news app prototype
