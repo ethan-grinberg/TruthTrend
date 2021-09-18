@@ -2,12 +2,9 @@
 
 from src.zinfo.article_selector import get_summarized_news
 from src.zinfo.twitter_bot import TwitterBot
-
+from src.zinfo.news_scraper import NewsScraper
 # twitter api keys
-APIKEY = 'aSzivrDavDusqmo0B1rWXjwOs'
-APISECRETKEY = 'GB3ob9rNnc1jtSL0SJtoSD6bdd8xVlx2NuUYkyyaiKJcgreBYy'
-ACCESSTOKEN = '1425899373255331842-OzkV1pmc4gtQjiJOvvgKaLdCpBmOuY'
-ACCESSTOKENSECRET = 'stfqHRxGOdEbtY0uH0vSROWjaXwjrFunVBgBu4hlq7pm3'
+from settings import APIKEY, APISECRETKEY, ACCESSTOKEN, ACCESSTOKENSECRET
 
 def main():
     summarized_news = get_summarized_news()

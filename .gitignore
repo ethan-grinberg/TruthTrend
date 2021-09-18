@@ -3,3 +3,6 @@ src/zinfo/__pycache__/article_selector.cpython-38.pyc
 src/zinfo/__pycache__/news_scraper.cpython-38.pyc
 
 credentials.txt
+keys.env
+src/zinfo/__pycache__/twitter_bot.cpython-38.pyc
+__pycache__/settings.cpython-38.pyc
