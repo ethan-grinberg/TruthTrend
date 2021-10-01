@@ -11,8 +11,8 @@ from src.zinfo.article_clustering import cluster_articles
 NEWS_FILE = 'selected_articles.csv'
 ALL_NEWS = 'all_news.csv'
 cwd = os.getcwd()
-all_news_path = os.path.join(cwd, "zinfo", "data", ALL_NEWS)
-selected_news_path = os.path.join(cwd, "zinfo", "data", NEWS_FILE)
+all_news_path = os.path.join(cwd, "TruthTrend", "data", ALL_NEWS)
+selected_news_path = os.path.join(cwd, "TruthTrend", "data", NEWS_FILE)
 
 
 def get_mean_vec(vectors, vector_length=300):
