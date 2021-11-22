@@ -3,6 +3,6 @@
 - Scrapes around 1000 articles per day based on trending Google Searches
 - Clusters the article titles
 - picks the most central article from each cluster 
-- tweets out most central article from each cluster
+- tweets out the most central article from each cluster
 
 ![image](https://user-images.githubusercontent.com/73128220/142784659-4360e59f-0bf1-49c0-a657-f409c1344cde.png)
